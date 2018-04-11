@@ -10,7 +10,6 @@ import ru.liga.lib.ReflectionHelper;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
 import java.util.List;
 
 public class TestingSystem {
@@ -30,7 +29,7 @@ public class TestingSystem {
         return method;
     }
 
-    private static void checkThatIsNotStatic(Method method) throws StaticMethodException {
+    private static void checkThatIsNotStatic(Method method) {
         if (Modifier.isStatic(method.getModifiers())) {
             throw new StaticMethodException(method);
         }
@@ -70,19 +69,15 @@ public class TestingSystem {
 
             if (beforeMethod != null) {
                 checkThatIsNotStatic(beforeMethod);
-            }
-            if (afterMethod != null) {
-                checkThatIsNotStatic(afterMethod);
-            }
-            checkThatIsNotStatic(testMethods);
-
-            if (beforeMethod != null) {
                 checkThatNoParameters(beforeMethod);
             }
             if (afterMethod != null) {
+                checkThatIsNotStatic(afterMethod);
                 checkThatNoParameters(afterMethod);
             }
+            checkThatIsNotStatic(testMethods);
             checkThatNoParameters(testMethods);
+
         } catch (Exception e) {
             System.out.println("Failed to run tests because of exception");
             e.printStackTrace();

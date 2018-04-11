@@ -4,8 +4,6 @@ import ru.liga.annotations.After;
 import ru.liga.annotations.Before;
 import ru.liga.annotations.Test;
 import ru.liga.assertion.Assertion;
-import ru.liga.exceptions.assertion.AssertEqualsException;
-import ru.liga.exceptions.assertion.AssertNotNullException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +18,7 @@ public class SimpleTest {
     }
 
     @Test
-    public void countSum() throws AssertEqualsException, AssertNotNullException {
+    public void countSum() {
         System.out.println("countSum");
         Assertion.assertNotNull(numbers);
         int sum = numbers.stream().mapToInt(Integer::intValue).sum();
@@ -28,7 +26,7 @@ public class SimpleTest {
     }
 
     @Test
-    public void countProduct() throws AssertEqualsException, AssertNotNullException {
+    public void countProduct() {
         System.out.println("countProduct");
         Assertion.assertNotNull(numbers);
         int product = numbers.stream().reduce(1, (a, b) -> a * b);
